@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Hospital.Web.Models
 {
@@ -15,6 +17,9 @@ namespace Hospital.Web.Models
         [Required]
         public string Outcome { get; set; }
 
-        public ICollection<Patient> Patients { get; set; }//Llave foranea
+       
+        [JsonIgnore]  //lo ignora en la respuesta json
+        [NotMapped]   //no se crea en la base de datos
+        public int IdPatient { get; set; }
     }
 }

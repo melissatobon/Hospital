@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Hospital.Web.Models
 {
@@ -7,14 +9,16 @@ namespace Hospital.Web.Models
     {
         [Key]
         public int Id { get; set; }
-        public int Date { get; set; }
+        public string Date { get; set; }
         [MaxLength(50, ErrorMessage = "El campo {0} debe contener al menos un caracter")]
         [Required]
-        public int Time { get; set; }
+        public string Time { get; set; }
         [MaxLength(50, ErrorMessage = "El campo {0} debe contener al menos un caracter")]
         [Required]
         public string Note { get; set; }
 
-        public ICollection<Patient> Patients { get; set; }//Llave foranea
+        [JsonIgnore]  //lo ignora en la respuesta json
+        [NotMapped]   //no se crea en la base de datos
+        public int IdPatient { get; set; }
     }
 }

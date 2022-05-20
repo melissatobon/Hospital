@@ -19,7 +19,7 @@ href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Countries</h3>
+                <h3 class="panel-title">Patients</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-hover table-responsive table-striped"id="MyTable">
@@ -43,10 +43,13 @@ href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
                                 <th>
                                     @Html.DisplayNameFor(model => model.DateBirth)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IsActive)
+                                 <th>
+                                    @Html.DisplayNameFor(model => model.Record)
                                 </th>
-
+                                
+                              
+                               
+                                
                             <th></th>
                         </tr>
                     </thead>
@@ -73,12 +76,17 @@ href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
                                     @Html.DisplayFor(model => item.DateBirth)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(model => item.IsActive)
+                                    @Html.DisplayFor(model => item.Record)
                                 </td>
+                                
+                                
+                              
                                <td>
-                             <a asp-action="Edit" asp-route-id="@item.Id"class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a> 
-                             <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal"data-target="#deleteDialog"><i class="fas fa-trash"></i></button>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a>
+<button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash"></i></button>
+
+</td>  
 
                             </tr>
                         }
