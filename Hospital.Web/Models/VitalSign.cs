@@ -7,7 +7,7 @@ namespace Hospital.Web.Models
 {
     public class VitalSign
     {
-        [Key]
+        
         public int Id { get; set; }
         public string Date { get; set; }
         [MaxLength(50, ErrorMessage = "El campo {0} debe contener al menos un caracter")]
@@ -27,7 +27,6 @@ namespace Hospital.Web.Models
         [NotMapped]   //no se crea en la base de datos
         public int IdPatient { get; set; }
 
-        public ICollection<MedicalNote> MedicalNotes { get; set; }
-        public ICollection<NurseNote> NurseNotes { get; set; }
+       
     }
 }

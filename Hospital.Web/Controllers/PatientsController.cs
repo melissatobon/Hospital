@@ -11,8 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Hospital.Web.Controllers
 {
-    [Authorize(Roles = "User")]
-   
+    
+    [Authorize(Roles = "Admin")]
+
     public class PatientsController : Controller
     {
         private readonly ApplicationDbContext _context;

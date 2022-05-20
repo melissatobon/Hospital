@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospital.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220519234201_inicial")]
+    [Migration("20220520004931_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,8 +164,8 @@ namespace Hospital.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Outcome")
                         .IsRequired()
@@ -175,9 +175,10 @@ namespace Hospital.Web.Migrations
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Time")
+                    b.Property<string>("Time")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -213,17 +214,12 @@ namespace Hospital.Web.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("VitalSignId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Id")
                         .IsUnique();
 
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("VitalSignId");
 
                     b.ToTable("MedicalNotes");
                 });
@@ -252,17 +248,12 @@ namespace Hospital.Web.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("VitalSignId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Id")
                         .IsUnique();
 
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("VitalSignId");
 
                     b.ToTable("NurseNotes");
                 });
@@ -275,8 +266,8 @@ namespace Hospital.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Estatus")
                         .HasColumnType("int");
@@ -289,9 +280,10 @@ namespace Hospital.Web.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Time")
+                    b.Property<string>("Time")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -547,10 +539,6 @@ namespace Hospital.Web.Migrations
                     b.HasOne("Hospital.Web.Models.Patient", null)
                         .WithMany("MedicalNotes")
                         .HasForeignKey("PatientId");
-
-                    b.HasOne("Hospital.Web.Models.VitalSign", null)
-                        .WithMany("MedicalNotes")
-                        .HasForeignKey("VitalSignId");
                 });
 
             modelBuilder.Entity("Hospital.Web.Models.NurseNote", b =>
@@ -558,10 +546,6 @@ namespace Hospital.Web.Migrations
                     b.HasOne("Hospital.Web.Models.Patient", null)
                         .WithMany("NurseNotes")
                         .HasForeignKey("PatientId");
-
-                    b.HasOne("Hospital.Web.Models.VitalSign", null)
-                        .WithMany("NurseNotes")
-                        .HasForeignKey("VitalSignId");
                 });
 
             modelBuilder.Entity("Hospital.Web.Models.Order", b =>
@@ -640,13 +624,6 @@ namespace Hospital.Web.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("VitalSigns");
-                });
-
-            modelBuilder.Entity("Hospital.Web.Models.VitalSign", b =>
-                {
-                    b.Navigation("MedicalNotes");
-
-                    b.Navigation("NurseNotes");
                 });
 #pragma warning restore 612, 618
         }

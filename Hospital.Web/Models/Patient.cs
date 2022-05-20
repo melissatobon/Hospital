@@ -6,7 +6,7 @@ namespace Hospital.Web.Models
 {
     public class Patient
     {
-        [Key]
+        
         public int Id { get; set; }
         
         public int Document { get; set; }       

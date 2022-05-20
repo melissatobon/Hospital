@@ -7,7 +7,7 @@ namespace Hospital.Web.Models
 {
     public class NurseNote
     {
-        [Key]
+       
         public int Id { get; set; }
         public string Date { get; set; }
         [MaxLength(50, ErrorMessage = "El campo {0} debe contener al menos un caracter")]

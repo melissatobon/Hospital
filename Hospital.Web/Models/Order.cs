@@ -7,12 +7,12 @@ namespace Hospital.Web.Models
 {
     public class Order
     {
-        [Key]
+       
         public int Id { get; set; }
-        public int Date { get; set; }
+        public string Date { get; set; }
         [MaxLength(50, ErrorMessage = "El campo {0} debe contener al menos un caracter")]
         [Required]
-        public int Time { get; set; }
+        public string Time { get; set; }
         [MaxLength(50, ErrorMessage = "El campo {0} debe contener al menos un caracter")]
         [Required]
         public string Process { get; set; }   

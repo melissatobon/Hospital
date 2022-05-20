@@ -3,10 +3,10 @@ using Hospital.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+
 namespace Hospital.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   
     public class AccountController : Controller
     {
         private readonly IUserHelper _userHelper;
@@ -14,6 +14,11 @@ namespace Hospital.Web.Controllers
         public AccountController(IUserHelper userHelper)
         {
             _userHelper = userHelper;
+        }
+
+        public IActionResult NotAuthorized()
+        {
+            return View();
         }
 
         public IActionResult Login()
