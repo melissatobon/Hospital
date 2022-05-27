@@ -13,11 +13,14 @@ namespace Hospital.Web.Data
         {
 
         }
-        public DbSet<Patient> Patients{ get; set; }
        
+
+        public DbSet<Patient> Patients{ get; set; }
+        
+
         public DbSet<LaboratoryExam> LaboratoryExams { get; set; }
         public DbSet<MedicalNote> MedicalNotes { get; set; }
-        public DbSet<NurseNote> NurseNotes { get; set; }
+       
         public DbSet<Order> Orders { get; set; }
         public DbSet<VitalSign> VitalSigns { get; set; }       
        
@@ -29,7 +32,7 @@ namespace Hospital.Web.Data
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Patient>()
-                .HasIndex(t => t.Document)
+                .HasIndex(t => t.Id)
                 .IsUnique();
 
            
@@ -44,10 +47,7 @@ namespace Hospital.Web.Data
                 .HasIndex(t => t.Id)
                 .IsUnique();
 
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<NurseNote>()
-                .HasIndex(t => t.Id)
-                .IsUnique();
+           
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Order>()

@@ -222,40 +222,6 @@ namespace Hospital.Web.Migrations
                     b.ToTable("MedicalNotes");
                 });
 
-            modelBuilder.Entity("Hospital.Web.Models.NurseNote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Time")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("NurseNotes");
-                });
-
             modelBuilder.Entity("Hospital.Web.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -317,16 +283,14 @@ namespace Hospital.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Record")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Document")
+                    b.HasIndex("Id")
                         .IsUnique();
 
                     b.ToTable("Patients");
@@ -539,13 +503,6 @@ namespace Hospital.Web.Migrations
                         .HasForeignKey("PatientId");
                 });
 
-            modelBuilder.Entity("Hospital.Web.Models.NurseNote", b =>
-                {
-                    b.HasOne("Hospital.Web.Models.Patient", null)
-                        .WithMany("NurseNotes")
-                        .HasForeignKey("PatientId");
-                });
-
             modelBuilder.Entity("Hospital.Web.Models.Order", b =>
                 {
                     b.HasOne("Hospital.Web.Models.Patient", null)
@@ -616,8 +573,6 @@ namespace Hospital.Web.Migrations
                     b.Navigation("LaboratoryExams");
 
                     b.Navigation("MedicalNotes");
-
-                    b.Navigation("NurseNotes");
 
                     b.Navigation("Orders");
 

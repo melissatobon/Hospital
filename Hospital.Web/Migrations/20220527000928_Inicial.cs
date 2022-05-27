@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hospital.Web.Migrations
 {
-    public partial class inicial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,7 +48,7 @@ namespace Hospital.Web.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Document = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Diagnosis = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Entity = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -155,27 +155,6 @@ namespace Hospital.Web.Migrations
                     table.PrimaryKey("PK_MedicalNotes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_MedicalNotes_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NurseNotes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Time = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PatientId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NurseNotes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_NurseNotes_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id");
@@ -388,17 +367,6 @@ namespace Hospital.Web.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NurseNotes_Id",
-                table: "NurseNotes",
-                column: "Id",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NurseNotes_PatientId",
-                table: "NurseNotes",
-                column: "PatientId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_Id",
                 table: "Orders",
                 column: "Id",
@@ -410,9 +378,9 @@ namespace Hospital.Web.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patients_Document",
+                name: "IX_Patients_Id",
                 table: "Patients",
-                column: "Document",
+                column: "Id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -449,9 +417,6 @@ namespace Hospital.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicalNotes");
-
-            migrationBuilder.DropTable(
-                name: "NurseNotes");
 
             migrationBuilder.DropTable(
                 name: "Orders");

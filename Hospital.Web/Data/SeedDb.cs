@@ -72,7 +72,7 @@ namespace Hospital.Web.Data
             if (!_context.Patients.Any())
             {
                 _context.Patients.Add(new Patient{
-                    Document = 123456,
+                    Document = 1234567,
                     Name = "Alejandro",
                     Age = 22,
                     Diagnosis = "Gastroentiritis aguda",
@@ -88,15 +88,7 @@ namespace Hospital.Web.Data
                             Note = "Paciente en malas condiciones" },
 
                         },
-                    NurseNotes = new List<NurseNote> {
-                            new NurseNote { Date = "19-05-2022",
-                            Time = "07:00",
-                            Note = "Paciente en malas condiciones" },
-
-                            new NurseNote { Date = "18-05-2022",
-                            Time = "23:00",
-                            Note = "Paciente en malas condiciones" },
-                    },
+                    
                     VitalSigns = new List<VitalSign> {
                     new VitalSign {
                         Date = "19-05-2022",
@@ -127,7 +119,7 @@ namespace Hospital.Web.Data
                 });
                 _context.Patients.Add(new Patient
                 {
-                    Document = 14343456,
+                    Document = 15864652,
                     Name = "Kevin",
                     Age = 32,
                     Diagnosis = "Sepsis",
@@ -143,15 +135,7 @@ namespace Hospital.Web.Data
                             Note = "Paciente en malas condiciones" },
 
                         },
-                    NurseNotes = new List<NurseNote> {
-                            new NurseNote { Date = "19-05-2022",
-                            Time = "07:00",
-                            Note = "Paciente en malas condiciones" },
-
-                            new NurseNote { Date = "18-05-2022",
-                            Time = "23:00",
-                            Note = "Paciente en malas condiciones" },
-                    },
+                    
                     VitalSigns = new List<VitalSign> {
                     new VitalSign {
                         Date = "19-05-2022",

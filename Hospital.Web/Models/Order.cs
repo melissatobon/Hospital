@@ -18,7 +18,6 @@ namespace Hospital.Web.Models
         public string Process { get; set; }   
         
         public int Estatus { get; set; }
-
         [JsonIgnore]  //lo ignora en la respuesta json
         [NotMapped]   //no se crea en la base de datos
         public int IdPatient { get; set; }

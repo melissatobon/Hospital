@@ -22,11 +22,10 @@ namespace Hospital.Web.Models
         public int Fr { get; set; }
         public int Spo2 { get; set; }
         public int Glucometry { get; set; }
-
         [JsonIgnore]  //lo ignora en la respuesta json
         [NotMapped]   //no se crea en la base de datos
         public int IdPatient { get; set; }
 
-       
+
     }
 }

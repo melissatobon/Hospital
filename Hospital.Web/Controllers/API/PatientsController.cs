@@ -20,8 +20,8 @@ namespace Hospital.Web.Controllers.API
         {
             return Ok(_context.Patients
                 .Include(c => c.VitalSigns)
-                .Include(c => c.MedicalNotes)
-                .Include(c => c.NurseNotes));
+                .Include(c => c.MedicalNotes));
+                 
                 //.ThenInclude(d => d.Cities));
         }
     }

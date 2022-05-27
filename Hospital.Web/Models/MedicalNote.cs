@@ -20,5 +20,6 @@ namespace Hospital.Web.Models
         [JsonIgnore]  //lo ignora en la respuesta json
         [NotMapped]   //no se crea en la base de datos
         public int IdPatient { get; set; }
+
     }
 }
