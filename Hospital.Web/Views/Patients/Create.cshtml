@@ -4,9 +4,25 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<h4>Patient</h4>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/Font-awesome/css/fontawesome.css"/>
+    <link rel="stylesheet" href="~/lib/Font-Awesome/css/regular.min.css">
+    <link rel="stylesheet" href="~/lib/Font-Awesome/css/solid.min.css">
+
+</head>
+<body>
+
+<h1 class="h1">Agregar paciente</h1>
+
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,13 +32,15 @@
 
             
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+               <input type="submit" value="Agregar" class="btn btn-outline-info" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-success">Back to List</a>
+   
 </div>
-
+</body>
+</html>

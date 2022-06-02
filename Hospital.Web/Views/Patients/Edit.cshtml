@@ -15,13 +15,9 @@
             <input type="hidden" asp-for="Id" />
             <partial name="_Patient"/>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-outline-info" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    
-    <a asp-action="Index" class="btn btn-success">Back to List</a>
 </div>

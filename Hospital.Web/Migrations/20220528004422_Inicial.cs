@@ -47,7 +47,7 @@ namespace Hospital.Web.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Document = table.Column<int>(type: "int", nullable: false),
+                    Document = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Diagnosis = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -119,27 +119,6 @@ namespace Hospital.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LaboratoryExams",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Time = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Outcome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PatientId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LaboratoryExams", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LaboratoryExams_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MedicalNotes",
                 columns: table => new
                 {
@@ -155,28 +134,6 @@ namespace Hospital.Web.Migrations
                     table.PrimaryKey("PK_MedicalNotes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_MedicalNotes_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Time = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Process = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Estatus = table.Column<int>(type: "int", nullable: false),
-                    PatientId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Orders_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id");
@@ -345,17 +302,6 @@ namespace Hospital.Web.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_LaboratoryExams_Id",
-                table: "LaboratoryExams",
-                column: "Id",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LaboratoryExams_PatientId",
-                table: "LaboratoryExams",
-                column: "PatientId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MedicalNotes_Id",
                 table: "MedicalNotes",
                 column: "Id",
@@ -364,17 +310,6 @@ namespace Hospital.Web.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_MedicalNotes_PatientId",
                 table: "MedicalNotes",
-                column: "PatientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_Id",
-                table: "Orders",
-                column: "Id",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_PatientId",
-                table: "Orders",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
@@ -413,13 +348,7 @@ namespace Hospital.Web.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "LaboratoryExams");
-
-            migrationBuilder.DropTable(
                 name: "MedicalNotes");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "VitalSigns");

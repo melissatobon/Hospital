@@ -4,11 +4,26 @@
     ViewData["Title"] = "Add Medical Note";
 }
 
-<h2>Add</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<h4>Medical Note</h4>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/Font-awesome/css/fontawesome.css"/>
+    <link rel="stylesheet" href="~/lib/Font-Awesome/css/regular.min.css">
+    <link rel="stylesheet" href="~/lib/Font-Awesome/css/solid.min.css">
+
+</head>
+
+<h2 class="h2">Agregar</h2>
+
+<h4 class="h4">Notas medicas</h4>
 <hr />
-<div class="row">
+<div class="row" >
     <div class="col-md-4">
         <form asp-action="AddMedicalNote">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,12 +32,13 @@
             <partial name="_MedicalNote" />
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" asp-route-id="@Model.IdPatient" class="btn btn-success">Back to List</a>
+                <input type="submit" value="Agregar" class="btn btn-outline-info" />
+                
+                <a asp-action="Details" asp-route-id="@Model.IdPatient" class="btn btn-outline-secondary">Volver</a> 
             </div>
         </form>
         <div class="panel-body">
-                <table class="table table-hover table-striped"id="MyTable">
+                <table class="table table-hover table-striped"id="MyTable" style="text-align:center;">
                     <thead>
                         <tr>
                             <th>
@@ -43,21 +59,21 @@
                        
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(model => model.Date)
+                                    @Html.DisplayFor(item => item.Date)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(model => model.Time)
+                                    @Html.DisplayFor(item => item.Time)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(model => model.Note)
+                                    @Html.DisplayFor(item => item.Note)
                                 </td>
                                 
                                 
                               
                                <td>
-                                    <a asp-action="EditMedicalNote" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="EditMedicalNote" asp-route-id="@Model.Id" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
                                    
-<button data-id="@Model.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash"></i></button>
+<button data-id="@Model.Id" class="btn btn-outline-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash"></i></button>
 
 </td>  
 
@@ -86,3 +102,5 @@ src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         });
     </script>
 } 
+
+</html>

@@ -53,14 +53,19 @@ button.accept-policy {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
+.html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    background-image: url(images/fondo.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    text-align:center;
+    
 }
 .footer {
   position: absolute;
@@ -68,4 +73,27 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/*.header {
+    background: url(images/fondo.jpg) no-repeat center;
+     background-size: cover;
+    min-height: 100vh;
+}*/
+
+  .header .navbar {
+        background-color: transparent !important;
+    }
+
+.h4  {
+    color: rgb(41,128,185);
+}
+
+.h1 {
+    color: rgb(41,128,185);
+}
+
+
+.h2 {
+    color: rgb(41,128,185);
 }

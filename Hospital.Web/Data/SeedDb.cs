@@ -72,7 +72,7 @@ namespace Hospital.Web.Data
             if (!_context.Patients.Any())
             {
                 _context.Patients.Add(new Patient{
-                    Document = 1234567,
+                    Document = "1234567",
                     Name = "Alejandro",
                     Age = 22,
                     Diagnosis = "Gastroentiritis aguda",
@@ -119,7 +119,7 @@ namespace Hospital.Web.Data
                 });
                 _context.Patients.Add(new Patient
                 {
-                    Document = 15864652,
+                    Document = "15864652",
                     Name = "Kevin",
                     Age = 32,
                     Diagnosis = "Sepsis",

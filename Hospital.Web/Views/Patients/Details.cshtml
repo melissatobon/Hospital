@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css"> 
-<h1>Details</h1>
+<h1 class="h1">Details</h1>
 
 <div>
     <h4>Patient</h4>
@@ -52,14 +52,18 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Record)
         </dd>
-         
+         <dd class = "col-sm-10">
+             @*<img src="@item.ImageFullPath" style="width:100px;height:100px; maxwidth:100%; height: auto;" />*@
+
+        </dd>
          
         
     </dl>
 </div>
 <div>
-     <a asp-action="AddMedicalNote" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-    <a asp-action="Index" class="btn btn-success">Back to List</a>
+     <a asp-action="AddMedicalNote" asp-route-id="@Model.Id" class=" btn btn-outline-info"><i class="fa-solid fa-notes-medical"></i>Notas</a>
+     <a asp-action="AddVitalSign" asp-route-id="@Model.Id" class=" btn btn-outline-info"><i class="fa-solid fa-heart-pulse"></i>Signos Vitales</a>
+    <a asp-action="Index" class=" btn btn-outline-info">Back to List</a>
 </div>
 <br />
 

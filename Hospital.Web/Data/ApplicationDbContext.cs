@@ -16,12 +16,12 @@ namespace Hospital.Web.Data
        
 
         public DbSet<Patient> Patients{ get; set; }
-        
 
-        public DbSet<LaboratoryExam> LaboratoryExams { get; set; }
+       
+     
         public DbSet<MedicalNote> MedicalNotes { get; set; }
        
-        public DbSet<Order> Orders { get; set; }
+       
         public DbSet<VitalSign> VitalSigns { get; set; }       
        
         public DbSet<Employee> Employees { get; set; }
@@ -38,21 +38,11 @@ namespace Hospital.Web.Data
            
 
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<LaboratoryExam>()
-                .HasIndex(t => t.Id)
-                .IsUnique();
-
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<MedicalNote>()
                 .HasIndex(t => t.Id)
                 .IsUnique();
 
            
-
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Order>()
-                .HasIndex(t => t.Id)
-                .IsUnique();
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<VitalSign>()

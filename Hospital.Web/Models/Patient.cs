@@ -11,7 +11,7 @@ namespace Hospital.Web.Models
         
         public int Id { get; set; }
 
-        public int Document { get; set; }
+        public string Document { get; set; }
 
         public string Name { get; set; }
         
@@ -22,18 +22,12 @@ namespace Hospital.Web.Models
         public string Record { get; set; }
         
 
-        public ICollection<LaboratoryExam> LaboratoryExams { get; set; }
+        
         public ICollection<MedicalNote> MedicalNotes { get; set; }
        
-        public ICollection<Order> Orders { get; set; }
+       
         public ICollection<VitalSign> VitalSigns { get; set; }
 
-        
-
-
-
-
-
-
+       
     }
 }

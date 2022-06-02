@@ -20,9 +20,9 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Patients</h3>
+                <h1 class="h1">Pacientes</h1>
             </div>
-            <a asp-action="Create" class=" btn btn-outline-success"><i class="fa-solid fa-user-plus"></i> Agregar paciente</a>
+            <a asp-action="Create" class=" btn btn-outline-info"><i class="fa-solid fa-user-plus"></i> Agregar paciente</a>
             <div class="panel-body">
                 <table class="table table-hover table-striped"id="MyTable">
                     <thead>
@@ -57,11 +57,11 @@
                                <td>
                                    
                                    
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class=" btn btn-outline-info"><i class="fas fa-edit"></i></a>
 
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class=" btn btn-outline-warning"><i class="fas fa-align-justify"></i></a>
                                     
-<button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash"></i></button>
+<button data-id="@item.Id" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash"></i></button>
 
 </td>  
 

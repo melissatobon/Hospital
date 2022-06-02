@@ -1,4 +1,5 @@
-﻿using Hospital.Web.Helpers;
+﻿using Hospital.Web.Data;
+using Hospital.Web.Helpers;
 using Hospital.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -9,11 +10,21 @@ namespace Hospital.Web.Controllers
    
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly IUserHelper _userHelper;
+        private readonly ICombosHelper _combosHelper;
+        private readonly IBlobHelper _blobHelper;
 
-        public AccountController(IUserHelper userHelper)
+        public AccountController(
+            ApplicationDbContext context,
+            IUserHelper userHelper,
+            ICombosHelper combosHelper,
+            IBlobHelper blobHelper)
         {
+            _context = context;
             _userHelper = userHelper;
+            _combosHelper = combosHelper;
+            _blobHelper = blobHelper;
         }
 
         public IActionResult NotAuthorized()
@@ -59,6 +70,9 @@ namespace Hospital.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
     }
+
+
+
 
 
 }

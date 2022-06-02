@@ -26,8 +26,8 @@ namespace Hospital.Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Patients
-                .Include(c => c.LaboratoryExams)
-                .Include(c => c.Orders)
+                
+               
                 .Include(c => c.MedicalNotes)
                 .Include(c => c.VitalSigns)
                 .ToListAsync());
@@ -42,8 +42,8 @@ namespace Hospital.Web.Controllers
             }
 
             var patient = await _context.Patients
-                .Include(c => c.LaboratoryExams)
-                .Include(c => c.Orders)
+              
+                
                 .Include(c => c.MedicalNotes)
                 .Include(c => c.VitalSigns)
 
@@ -168,8 +168,8 @@ namespace Hospital.Web.Controllers
             }
 
             Patient patient = await _context.Patients
-                .Include(c => c.LaboratoryExams)
-                .Include(c => c.Orders)
+                
+                
                 .Include(c => c.MedicalNotes)
                 .Include(c => c.VitalSigns)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -211,8 +211,8 @@ namespace Hospital.Web.Controllers
                 Patient patient = await _context.Patients
                     .Include(c => c.VitalSigns)
                     .Include(c => c.MedicalNotes)
-                    .Include(c => c.LaboratoryExams)
-                    .Include(c => c.Orders)
+                    
+                   
                     .FirstOrDefaultAsync(c => c.Id == vitalSign.IdPatient);
                 if (patient == null)
                 {
@@ -355,9 +355,9 @@ namespace Hospital.Web.Controllers
             {
                 Patient patient = await _context.Patients
                     .Include(d => d.MedicalNotes)
-                    .Include(d => d.LaboratoryExams)
+                   
                     .Include(d => d.MedicalNotes)
-                    .Include(d => d.Orders)
+                   
                     .FirstOrDefaultAsync(c => c.Id == medicalNote.IdPatient);
                 if (patient == null)
                 {
@@ -477,300 +477,154 @@ namespace Hospital.Web.Controllers
 
         }
 
-        public async Task<IActionResult> AddLaboratoryExam(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+       
 
-            Patient patient = await _context.Patients.FindAsync(id);
-            if (patient == null)
-            {
+        //public async Task<IActionResult> AddOrder(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-                return NotFound();
-            }
+        //    Patient patient = await _context.Patients.FindAsync(id);
+        //    if (patient == null)
+        //    {
 
-            LaboratoryExam model = new LaboratoryExam { IdPatient = patient.Id };
-            return View(model);
-        }
+        //        return NotFound();
+        //    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddLaboratoryExam(LaboratoryExam laboratoryExam)
-        {
-            if (ModelState.IsValid)
-            {
-                Patient patient = await _context.Patients
-                    .Include(d => d.MedicalNotes)
-                    .Include(d => d.LaboratoryExams)
-                    .Include(d => d.MedicalNotes)
-                    .Include(d => d.Orders)
-                    .FirstOrDefaultAsync(c => c.Id == laboratoryExam.IdPatient);
-                if (patient == null)
-                {
-                    return NotFound();
-                }
+        //    Order model = new Order { IdPatient = patient.Id };
+        //    return View(model);
+        //}
 
-                try
-                {
-                    laboratoryExam.Id = 0;
-                    patient.LaboratoryExams.Add(laboratoryExam);
-                    _context.Update(patient);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new
-                    {
-                        Id = patient.Id
-                    });
-                }
-                catch (DbUpdateException dbUpdateException)
-                {
-                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
-                    {
-                        ModelState.AddModelError(string.Empty, "There are a record with the same name.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty,
-        dbUpdateException.InnerException.Message);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    ModelState.AddModelError(string.Empty, exception.Message);
-                }
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddOrder(Order order)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Patient patient = await _context.Patients
+        //            .Include(d => d.MedicalNotes)
+                   
+        //            .Include(d => d.MedicalNotes)
+        //            .Include(d => d.Orders)
+        //            .FirstOrDefaultAsync(c => c.Id == order.IdPatient);
+        //        if (patient == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-            return View(laboratoryExam);
-        }
+        //        try
+        //        {
+        //            order.Id = 0;
+        //            patient.Orders.Add(order);
+        //            _context.Update(patient);
+        //            await _context.SaveChangesAsync();
+        //            return RedirectToAction(nameof(Details), new
+        //            {
+        //                Id = patient.Id
+        //            });
+        //        }
+        //        catch (DbUpdateException dbUpdateException)
+        //        {
+        //            if (dbUpdateException.InnerException.Message.Contains("duplicate"))
+        //            {
+        //                ModelState.AddModelError(string.Empty, "There are a record with the same name.");
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError(string.Empty,
+        //dbUpdateException.InnerException.Message);
+        //            }
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            ModelState.AddModelError(string.Empty, exception.Message);
+        //        }
+        //    }
 
-
-
-        public async Task<IActionResult> EditLaboratoryExam(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            LaboratoryExam laboratoryExam = await _context.LaboratoryExams.FindAsync(id);
-            if (laboratoryExam == null)
-            {
-                return NotFound();
-            }
-
-            Patient patient = await _context.Patients.FirstOrDefaultAsync(c =>
-        c.LaboratoryExams.FirstOrDefault(d => d.Id == laboratoryExam.Id) != null);
-            laboratoryExam.IdPatient = patient.Id;
-            return View(laboratoryExam);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditLaboratoryExam(LaboratoryExam laboratoryExam)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(laboratoryExam);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new { Id = laboratoryExam.IdPatient });
-                }
-                catch (DbUpdateException dbUpdateException)
-                {
-
-                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
-                    {
-                        ModelState.AddModelError(string.Empty, "There are a record with the same name.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty,
-        dbUpdateException.InnerException.Message);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    ModelState.AddModelError(string.Empty, exception.Message);
-                }
-            }
-            return View(laboratoryExam);
-        }
-
-        public async Task<IActionResult> DeleteLaboratoryExam(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            LaboratoryExam laboratoryExam = await _context.LaboratoryExams
-
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (laboratoryExam == null)
-            {
-                return NotFound();
-            }
-
-            Patient patient = await _context.Patients.FirstOrDefaultAsync(c =>
-        c.LaboratoryExams.FirstOrDefault(d => d.Id == laboratoryExam.Id) != null);
-            _context.LaboratoryExams.Remove(laboratoryExam);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new
-            {
-                Id = patient.Id
-            });
-
-
-        }
-
-        public async Task<IActionResult> AddOrder(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Patient patient = await _context.Patients.FindAsync(id);
-            if (patient == null)
-            {
-
-                return NotFound();
-            }
-
-            Order model = new Order { IdPatient = patient.Id };
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrder(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                Patient patient = await _context.Patients
-                    .Include(d => d.MedicalNotes)
-                    .Include(d => d.LaboratoryExams)
-                    .Include(d => d.MedicalNotes)
-                    .Include(d => d.Orders)
-                    .FirstOrDefaultAsync(c => c.Id == order.IdPatient);
-                if (patient == null)
-                {
-                    return NotFound();
-                }
-
-                try
-                {
-                    order.Id = 0;
-                    patient.Orders.Add(order);
-                    _context.Update(patient);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new
-                    {
-                        Id = patient.Id
-                    });
-                }
-                catch (DbUpdateException dbUpdateException)
-                {
-                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
-                    {
-                        ModelState.AddModelError(string.Empty, "There are a record with the same name.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty,
-        dbUpdateException.InnerException.Message);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    ModelState.AddModelError(string.Empty, exception.Message);
-                }
-            }
-
-            return View(order);
-        }
+        //    return View(order);
+        //}
 
 
 
-        public async Task<IActionResult> EditOrder(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> EditOrder(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            Order order = await _context.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+        //    Order order = await _context.Orders.FindAsync(id);
+        //    if (order == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            Patient patient = await _context.Patients.FirstOrDefaultAsync(c =>
-        c.Orders.FirstOrDefault(d => d.Id == order.Id) != null);
-            order.IdPatient = patient.Id;
-            return View(order);
-        }
+        //    Patient patient = await _context.Patients.FirstOrDefaultAsync(c =>
+        //c.Orders.FirstOrDefault(d => d.Id == order.Id) != null);
+        //    order.IdPatient = patient.Id;
+        //    return View(order);
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditOrder(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new { Id = order.IdPatient });
-                }
-                catch (DbUpdateException dbUpdateException)
-                {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> EditOrder(Order order)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(order);
+        //            await _context.SaveChangesAsync();
+        //            return RedirectToAction(nameof(Details), new { Id = order.IdPatient });
+        //        }
+        //        catch (DbUpdateException dbUpdateException)
+        //        {
 
-                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
-                    {
-                        ModelState.AddModelError(string.Empty, "There are a record with the same name.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty,
-        dbUpdateException.InnerException.Message);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    ModelState.AddModelError(string.Empty, exception.Message);
-                }
-            }
-            return View(order);
-        }
+        //            if (dbUpdateException.InnerException.Message.Contains("duplicate"))
+        //            {
+        //                ModelState.AddModelError(string.Empty, "There are a record with the same name.");
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError(string.Empty,
+        //dbUpdateException.InnerException.Message);
+        //            }
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            ModelState.AddModelError(string.Empty, exception.Message);
+        //        }
+        //    }
+        //    return View(order);
+        //}
 
-        public async Task<IActionResult> DeleteOrder(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> DeleteOrder(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            Order order = await _context.Orders
+        //    Order order = await _context.Orders
 
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (order == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            Patient patient = await _context.Patients.FirstOrDefaultAsync(c =>
-        c.Orders.FirstOrDefault(d => d.Id == order.Id) != null);
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new
-            {
-                Id = patient.Id
-            });
+        //    Patient patient = await _context.Patients.FirstOrDefaultAsync(c =>
+        //c.Orders.FirstOrDefault(d => d.Id == order.Id) != null);
+        //    _context.Orders.Remove(order);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Details), new
+        //    {
+        //        Id = patient.Id
+        //    });
 
 
-        }
+        //}
     }
 }
